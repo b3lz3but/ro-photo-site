@@ -6,8 +6,8 @@
     <div class="rounded-full border-2 border-white dark:border-zinc-400 shadow-md group-hover:shadow-xl transition-shadow duration-100 shrink-0">
       <NuxtImg
         class="inline-block h-14 w-14 rounded-full"
-        src="/img/logo.jpg"
-        alt="Oscar Mattern"
+        src="/img/green.webp"
+        alt="Ciprian Radulescu"
         format="webp"
         width="100"
         height="100"
