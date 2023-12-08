@@ -946,11 +946,11 @@ const LazyGalleryListItem = defineAsyncComponent(() => import('./_nuxt/GalleryLi
 const LazyHeroGrid = defineAsyncComponent(() => import('./_nuxt/HeroGrid-a403374b.mjs').then((r) => r.default));
 const LazyHeroText = defineAsyncComponent(() => import('./_nuxt/HeroText-884ff14d.mjs').then((r) => r.default));
 const LazyMasonryGallery = defineAsyncComponent(() => import('./_nuxt/MasonryGallery-635ff695.mjs').then((r) => r.default));
-const LazyPackagePrice = defineAsyncComponent(() => import('./_nuxt/PackagePrice-a1fe188e.mjs').then((r) => r.default));
+const LazyPackagePrice = defineAsyncComponent(() => import('./_nuxt/PackagePrice-4d3bb1fc.mjs').then((r) => r.default));
 const LazyPageHeader = defineAsyncComponent(() => import('./_nuxt/PageHeader-c6881326.mjs').then((r) => r.default));
-const LazyQaItem = defineAsyncComponent(() => import('./_nuxt/QaItem-a2eccf0c.mjs').then((r) => r.default));
+const LazyQaItem = defineAsyncComponent(() => import('./_nuxt/QaItem-6dbd298f.mjs').then((r) => r.default));
 const LazySectionAboutMe = defineAsyncComponent(() => import('./_nuxt/SectionAboutMe-74fc7965.mjs').then((r) => r.default));
-const LazySectionCtaHireMe = defineAsyncComponent(() => import('./_nuxt/SectionCtaHireMe-1679f1cf.mjs').then((r) => r.default));
+const LazySectionCtaHireMe = defineAsyncComponent(() => import('./_nuxt/SectionCtaHireMe-c8803030.mjs').then((r) => r.default));
 const LazySectionFaq = defineAsyncComponent(() => import('./_nuxt/SectionFaq-f933a46d.mjs').then((r) => r.default));
 const LazySectionPackages = defineAsyncComponent(() => import('./_nuxt/SectionPackages-2c4d7134.mjs').then((r) => r.default));
 const LazySectionTestimonials = defineAsyncComponent(() => import('./_nuxt/SectionTestimonials-07b1a51e.mjs').then((r) => r.default));
@@ -994,8 +994,8 @@ const LazyProseTh = defineAsyncComponent(() => import('./_nuxt/ProseTh-30000ab8.
 const LazyProseThead = defineAsyncComponent(() => import('./_nuxt/ProseThead-28094b57.mjs').then((r) => r.default));
 const LazyProseTr = defineAsyncComponent(() => import('./_nuxt/ProseTr-fdd30ae4.mjs').then((r) => r.default));
 const LazyProseUl = defineAsyncComponent(() => import('./_nuxt/ProseUl-6d4d9f20.mjs').then((r) => r.default));
-const LazyIcon = defineAsyncComponent(() => import('./_nuxt/Icon-5c53eef7.mjs').then((r) => r.default));
-const LazyIconCSS = defineAsyncComponent(() => import('./_nuxt/IconCSS-1eee7521.mjs').then((r) => r.default));
+const LazyIcon = defineAsyncComponent(() => import('./_nuxt/Icon-0b4a414e.mjs').then((r) => r.default));
+const LazyIconCSS = defineAsyncComponent(() => import('./_nuxt/IconCSS-7bef7442.mjs').then((r) => r.default));
 const lazyGlobalComponents = [
   ["AwardsItem", LazyAwardsItem],
   ["AwardsList", LazyAwardsList],
