@@ -1,12 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   pages: true,
+
   /**
    * Nuxt.js modules
    */
   modules: [// Doc: https://tailwindcss.nuxtjs.org/
   "@nuxtjs/tailwindcss", // Doc: https://image.nuxtjs.org/
-  "@nuxt/image-edge", // Doc: https://content.nuxtjs.org/
+  "@nuxt/image", // Doc: https://content.nuxtjs.org/
   "@nuxt/content", // Doc: https://vueuse.org/guide/#installation
   "@vueuse/nuxt", // Doc: https://color-mode.nuxtjs.org/
   "@nuxtjs/color-mode", // Doc: https://github.com/nuxt-modules/icon
@@ -51,4 +52,6 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: "./assets/css/tailwind.css",
   },
+
+  compatibilityDate: "2025-02-05",
 });

@@ -11,16 +11,39 @@ type Props = {
 };
 
 defineProps<Props>();
+
+// Fix: Use useImage() instead of $img
+const { $img } = useNuxtApp();
 </script>
 
 <template>
   <div class="not-prose">
     <PhotoSwipe>
       <div>
-        <MasonryWall :items="images" :ssr-columns="1" :column-width="300" :gap="32" class="grid grid-cols-2 lg:grid-cols-3 gap-8">
+        <MasonryWall
+          :items="images"
+          :ssr-columns="1"
+          :column-width="300"
+          :gap="32"
+          class="grid grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           <template #default="{ item }: itemPropsT">
-            <a class="photoswipe-item rounded-xl overflow-hidden block dark:bg-zinc-800 bg-zinc-200" :href="$img(item.src, { width: 1600 })" data-cropped="true" :data-pswp-width="item.width" :data-pswp-height="item.height">
-              <NuxtImg :src="item.src" alt="Some image" sizes="sm:90vw md:50vw lg:30vw" class="w-full h-full object-cover object-center" :width="item.width" :height="item.height" loading="lazy" />
+            <a
+              class="photoswipe-item rounded-xl overflow-hidden block dark:bg-zinc-800 bg-zinc-200"
+              :href="$img ? $img(item.src, { width: 1600 }) : item.src"
+              data-cropped="true"
+              :data-pswp-width="item.width"
+              :data-pswp-height="item.height"
+            >
+              <NuxtImg
+                :src="item.src"
+                alt="Some image"
+                sizes="sm:90vw md:50vw lg:30vw"
+                class="w-full h-full object-cover object-center"
+                :width="item.width"
+                :height="item.height"
+                loading="lazy"
+              />
             </a>
           </template>
         </MasonryWall>
