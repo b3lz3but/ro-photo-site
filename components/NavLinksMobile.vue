@@ -5,6 +5,8 @@ import { Bars2Icon } from "@heroicons/vue/20/solid";
 const { links } = defineProps<{
   links: { name: string; to: string }[];
 }>();
+
+const { isActive } = useActiveLink();
 </script>
 <template>
   <Menu as="div" class="inline-block text-left z-10">
@@ -29,23 +31,19 @@ const { links } = defineProps<{
         class="absolute right-0 mt-4 w-56 origin-top-right divide-y divide-zinc-100 dark:divide-zinc-700 rounded-xl bg-white dark:bg-black shadow-lg ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-5 focus:outline-none"
       >
         <div class="px-2 py-2 w-full">
-          <MenuItem
-            v-for="(link, index) in links"
-            :key="index"
-            v-slot="{ close }"
-          >
+          <MenuItem v-for="link in links" :key="link.to" v-slot="{ close }">
             <NuxtLink
+              :to="link.to"
+              :aria-current="isActive(link.to) ? 'page' : undefined"
               :class="[
-                $route.path === link.to
+                isActive(link.to)
                   ? 'bg-zinc-200 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200'
                   : 'text-zinc-900 dark:text-zinc-200',
                 'group block w-full items-center rounded-xl text-sm',
               ]"
-              :to="link.to"
+              @click="close"
             >
-              <span @click.native="close" class="truncate px-4 py-2 block">{{
-                link.name
-              }}</span>
+              <span class="truncate px-4 py-2 block">{{ link.name }}</span>
             </NuxtLink>
           </MenuItem>
         </div>
