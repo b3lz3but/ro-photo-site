@@ -1,6 +1,11 @@
 <template>
   <article class="min-h-screen flex flex-col items-stretch">
-    
+    <!-- Skip to content for accessibility -->
+    <SkipToContent />
+
+    <!-- Toast notifications -->
+    <ToastNotification />
+
     <!-- ring -->
     <div class="fixed inset-0 flex justify-center sm:px-8">
       <div class="flex w-full max-w-7xl lg:px-8">
@@ -23,12 +28,12 @@
         />
       </div>
     </Container>
-    
+
     <!-- header -->
     <Header />
-    
+
     <!-- main -->
-    <main class="maya-prose">
+    <main id="main-content" class="maya-prose" role="main">
       <Container>
         <slot />
       </Container>
@@ -36,6 +41,6 @@
 
     <!-- footer -->
     <Footer class="mt-auto" />
-  
+
   </article>
 </template>
