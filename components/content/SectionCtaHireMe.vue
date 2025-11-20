@@ -13,38 +13,38 @@
         </div>
         <ul class="mt-16 flex flex-col gap-4 lg:gap-12 lg:flex-row items-center justify-center max-w-2xl mx-auto">
           <li>
-            <NuxtLink to="mailto:ciprian.radulescu85@gmail.com" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+            <a href="mailto:ciprian.radulescu85@gmail.com" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
               <Icon name="heroicons:envelope-20-solid" size="1.8rem" />
               <span>FixedFocusedDesigns</span>
-            </NuxtLink>
+            </a>
           </li>
           <li>
-            <NuxtLink to="https://www.instagram.com/b3lz3but/" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+            <a href="https://www.instagram.com/b3lz3but/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
               <Icon name="fe:instagram" size="1.8rem" />
               <span>FFD</span>
-            </NuxtLink>
+            </a>
           </li>
           <li>
-            <NuxtLink to="tel:+40721354125" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+            <a href="tel:+40721354125" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
               <Icon name="fe:phone" size="1.8rem" />
               <span>+40721354125</span>
-            </NuxtLink>
+            </a>
           </li>
         </ul>
       </div>
       <svg viewBox="0 0 1024 1024" class="hidden dark:block absolute top-1/2 left-1/2 h-[64rem] w-[64rem] -translate-x-1/2 pointer-events-none" aria-hidden="true">
-        <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7"></circle>
+        <circle cx="512" cy="512" r="512" fill="url(#gradient-dark-cta)" fill-opacity="0.7"></circle>
         <defs>
-          <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
+          <radialGradient id="gradient-dark-cta" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
             <stop stop-color="#18181B"></stop>
             <stop offset="1" stop-color="#333626" stop-opacity="0"></stop>
           </radialGradient>
         </defs>
       </svg>
       <svg viewBox="0 0 1024 1024" class="dark:hidden absolute top-1/2 left-1/2 h-[64rem] w-[64rem] -translate-x-1/2 pointer-events-none" aria-hidden="true">
-        <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7"></circle>
+        <circle cx="512" cy="512" r="512" fill="url(#gradient-light-cta)" fill-opacity="0.7"></circle>
         <defs>
-          <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
+          <radialGradient id="gradient-light-cta" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
             <stop stop-color="#F0F0F0"></stop>
             <stop offset="1" stop-color="#F3E0AD" stop-opacity="0"></stop>
           </radialGradient>

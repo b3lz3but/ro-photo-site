@@ -22,7 +22,7 @@ defineProps({
       {{ titleText }}
     </h3>
     <ul class="space-y-4">
-      <AwardsItem v-for="(item, index) in awards" :key="index" :title="item.title" :year="item.year" :description="item.description" />
+      <AwardsItem v-for="(item, index) in awards" :key="`${item.title}-${item.year}-${index}`" :title="item.title" :year="item.year" :description="item.description" />
     </ul>
   </div>
 </template>

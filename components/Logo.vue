@@ -13,6 +13,6 @@
         height="100"
       />
     </div>
-    <span class="uppercase tracking-widest hidden md:inline-flex shrink-1 sr-only">Oscar Mattern</span>
+    <span class="uppercase tracking-widest hidden md:inline-flex shrink-1 sr-only">Ciprian Radulescu</span>
   </NuxtLink>
 </template>

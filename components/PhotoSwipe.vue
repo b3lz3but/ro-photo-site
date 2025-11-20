@@ -1,11 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 
 const gallery = ref(null);
 const slots = useSlots();
-const children = slots.default() ? slots.default()[0].children : false;
-const childrenType = children ? children[0].type : false;
+const defaultSlot = slots.default?.();
+const children = defaultSlot?.[0]?.children;
+const childrenType = Array.isArray(children) && children.length > 0 ? children[0]?.type : false;
 
 let lightbox;
 
