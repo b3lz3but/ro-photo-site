@@ -116,7 +116,7 @@ watch([columnWidth, gap], () => redraw());
         'flex-direction': 'column',
         'flex-grow': 1,
         gap: `${gap}px`,
-        height: ['-webkit-max-content', '-moz-max-content', 'max-content'] as any,
+        height: 'max-content',
         'min-width': 0
       }"
     >

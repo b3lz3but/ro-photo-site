@@ -12,8 +12,7 @@ type Props = {
 
 defineProps<Props>();
 
-// Fix: Use useImage() instead of $img
-const { $img } = useNuxtApp();
+const img = useImage();
 </script>
 
 <template>
@@ -30,14 +29,14 @@ const { $img } = useNuxtApp();
           <template #default="{ item }: itemPropsT">
             <a
               class="photoswipe-item rounded-xl overflow-hidden block dark:bg-zinc-800 bg-zinc-200"
-              :href="$img ? $img(item.src, { width: 1600 }) : item.src"
+              :href="img(item.src, { width: 1600 })"
               data-cropped="true"
               :data-pswp-width="item.width"
               :data-pswp-height="item.height"
             >
               <NuxtImg
                 :src="item.src"
-                alt="Some image"
+                :alt="item.alt || 'Gallery image'"
                 sizes="sm:90vw md:50vw lg:30vw"
                 class="w-full h-full object-cover object-center"
                 :width="item.width"

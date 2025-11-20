@@ -21,8 +21,8 @@ const galleries = computed(() => _galleries.value || [])
 <template>
   <div v-if="galleries?.length" class="not-prose grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <GalleryListItem
-        v-for="(gallery, index) in galleries"
-        :key="index"
+        v-for="gallery in galleries"
+        :key="gallery._path"
         :gallery="gallery"
       />
     </div>
