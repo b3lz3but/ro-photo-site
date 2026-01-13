@@ -6,45 +6,67 @@ const form = reactive({
   email: '',
   subject: '',
   message: '',
+  website: '', // Honeypot field - should remain empty
 })
 
 const errors = ref<Record<string, string>>({})
 const isSubmitting = ref(false)
+const submitTime = ref(Date.now())
 
 const validateForm = (): boolean => {
   errors.value = {}
 
+  // Honeypot check - if filled, it's a bot
+  if (form.website) {
+    // Silently reject but pretend success to confuse bots
+    return false
+  }
+
+  // Time-based check - if submitted too fast (< 3 seconds), likely a bot
+  if (Date.now() - submitTime.value < 3000) {
+    errors.value.general = 'Te rugăm să aștepți câteva secunde înainte de a trimite.'
+    return false
+  }
+
   if (!form.name.trim()) {
-    errors.value.name = 'Name is required'
+    errors.value.name = 'Numele este obligatoriu'
   } else if (form.name.length < 2 || form.name.length > 100) {
-    errors.value.name = 'Name must be between 2 and 100 characters'
+    errors.value.name = 'Numele trebuie să aibă între 2 și 100 de caractere'
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!form.email.trim()) {
-    errors.value.email = 'Email is required'
+    errors.value.email = 'Email-ul este obligatoriu'
   } else if (!emailRegex.test(form.email)) {
-    errors.value.email = 'Invalid email address'
+    errors.value.email = 'Adresa de email nu este validă'
   }
 
   if (form.subject && form.subject.length > 200) {
-    errors.value.subject = 'Subject must be less than 200 characters'
+    errors.value.subject = 'Subiectul trebuie să aibă mai puțin de 200 de caractere'
   }
 
   if (!form.message.trim()) {
-    errors.value.message = 'Message is required'
+    errors.value.message = 'Mesajul este obligatoriu'
   } else if (form.message.length < 10) {
-    errors.value.message = 'Message must be at least 10 characters'
+    errors.value.message = 'Mesajul trebuie să aibă cel puțin 10 caractere'
   } else if (form.message.length > 5000) {
-    errors.value.message = 'Message must be less than 5000 characters'
+    errors.value.message = 'Mesajul trebuie să aibă mai puțin de 5000 de caractere'
   }
 
   return Object.keys(errors.value).length === 0
 }
 
 const submitForm = async () => {
+  // Honeypot check - silently succeed for bots
+  if (form.website) {
+    success('Mulțumim pentru mesaj! Îți vom răspunde în curând.')
+    return
+  }
+
   if (!validateForm()) {
-    showError('Please fix the errors in the form')
+    if (!form.website) {
+      showError('Te rugăm să corectezi erorile din formular')
+    }
     return
   }
 
@@ -53,31 +75,56 @@ const submitForm = async () => {
   try {
     const response = await $fetch('/api/contact', {
       method: 'POST',
-      body: form,
+      body: {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      },
     })
 
-    success('Thank you for your message! We\'ll get back to you soon.')
+    success('Mulțumim pentru mesaj! Îți vom răspunde în curând.')
 
     // Reset form
     form.name = ''
     form.email = ''
     form.subject = ''
     form.message = ''
+    form.website = ''
     errors.value = {}
+    submitTime.value = Date.now()
   } catch (err: any) {
-    showError(err.data?.message || 'Failed to send message. Please try again.')
+    showError(err.data?.message || 'Mesajul nu a putut fi trimis. Te rugăm să încerci din nou.')
   } finally {
     isSubmitting.value = false
   }
 }
+
+// Reset submit time when component mounts
+onMounted(() => {
+  submitTime.value = Date.now()
+})
 </script>
 
 <template>
   <form @submit.prevent="submitForm" class="space-y-6">
+    <!-- Honeypot field - hidden from users, visible to bots -->
+    <div class="hidden" aria-hidden="true">
+      <label for="website">Website</label>
+      <input
+        id="website"
+        v-model="form.website"
+        type="text"
+        name="website"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
     <!-- Name -->
     <div>
       <label for="name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-        Name *
+        Nume *
       </label>
       <input
         id="name"
@@ -125,7 +172,7 @@ const submitForm = async () => {
     <!-- Subject -->
     <div>
       <label for="subject" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-        Subject
+        Subiect
       </label>
       <input
         id="subject"
@@ -148,7 +195,7 @@ const submitForm = async () => {
     <!-- Message -->
     <div>
       <label for="message" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-        Message *
+        Mesaj *
       </label>
       <textarea
         id="message"
@@ -169,14 +216,19 @@ const submitForm = async () => {
       </p>
     </div>
 
+    <!-- General error -->
+    <p v-if="errors.general" class="text-sm text-red-600 dark:text-red-400">
+      {{ errors.general }}
+    </p>
+
     <!-- Submit Button -->
     <button
       type="submit"
       :disabled="isSubmitting"
       class="w-full px-6 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      <span v-if="!isSubmitting">Send Message</span>
-      <span v-else>Sending...</span>
+      <span v-if="!isSubmitting">Trimite Mesaj</span>
+      <span v-else>Se trimite...</span>
     </button>
   </form>
 </template>

@@ -1,91 +1,57 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
-
 const props = defineProps({
-  error: {
-    type: Object as () => NuxtError,
-    required: true,
-  },
+  error: Object
 })
 
 const handleError = () => clearError({ redirect: '/' })
-
-const errorMessages = {
-  404: {
-    title: 'Page Not Found',
-    message: 'Sorry, the page you are looking for doesn\'t exist or has been moved.',
-  },
-  500: {
-    title: 'Server Error',
-    message: 'Oops! Something went wrong on our end. Please try again later.',
-  },
-  default: {
-    title: 'An Error Occurred',
-    message: 'Something unexpected happened. We\'re working to fix it.',
-  },
-}
-
-const currentError = computed(() => {
-  const statusCode = props.error.statusCode
-  if (statusCode === 404) return errorMessages[404]
-  if (statusCode >= 500) return errorMessages[500]
-  return errorMessages.default
-})
-
-useSeoMeta({
-  title: `${currentError.value.title} | Fixed Focused Designs`,
-  description: currentError.value.message,
-})
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center px-4 bg-zinc-50 dark:bg-zinc-900">
-    <div class="max-w-2xl w-full text-center">
-      <!-- Error code -->
-      <h1 class="text-9xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
-        {{ error.statusCode || '500' }}
+  <div class="min-h-screen bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center px-4">
+    <div class="text-center max-w-xl">
+      <!-- Error Code -->
+      <h1 class="font-display text-9xl font-bold text-gradient mb-4">
+        {{ error?.statusCode || '404' }}
       </h1>
 
-      <!-- Error title -->
-      <h2 class="text-3xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
-        {{ currentError.title }}
+      <!-- Error Message -->
+      <h2 class="font-display text-3xl text-zinc-800 dark:text-zinc-200 mb-4">
+        {{ error?.statusCode === 404 ? 'Pagina nu a fost găsită' : 'A apărut o eroare' }}
       </h2>
 
-      <!-- Error message -->
-      <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-        {{ currentError.message }}
+      <p class="text-zinc-600 dark:text-zinc-400 mb-8">
+        {{ error?.statusCode === 404
+          ? 'Ne pare rău, pagina pe care o cauți nu există sau a fost mutată.'
+          : error?.message || 'A apărut o eroare neașteptată. Te rugăm să încerci din nou.'
+        }}
       </p>
 
-      <!-- Error details (only in development) -->
-      <div v-if="error.message && process.dev" class="mb-8 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg text-left">
-        <p class="text-sm font-mono text-red-800 dark:text-red-200">
-          {{ error.message }}
-        </p>
-      </div>
+      <!-- Back Home Button -->
+      <button
+        @click="handleError"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium hover:bg-zinc-700 dark:hover:bg-zinc-100 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Înapoi la pagina principală
+      </button>
 
-      <!-- Action buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button
-          @click="handleError"
-          class="px-6 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
-        >
-          Go to Homepage
-        </button>
-        <button
-          @click="$router.back()"
-          class="px-6 py-3 border-2 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-lg hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
-        >
-          Go Back
-        </button>
+      <!-- Quick Links -->
+      <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-700">
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4">Poate te interesează:</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <NuxtLink to="/galleries" class="text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            Galerii
+          </NuxtLink>
+          <NuxtLink to="/stories" class="text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            Povești
+          </NuxtLink>
+          <NuxtLink to="/hire-me" class="text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            Contact
+          </NuxtLink>
+        </div>
       </div>
-
-      <!-- Support message -->
-      <p class="mt-8 text-sm text-zinc-500 dark:text-zinc-500">
-        If this problem persists, please
-        <a href="mailto:ciprian.radulescu85@gmail.com" class="underline hover:text-zinc-700 dark:hover:text-zinc-300">
-          contact support
-        </a>
-      </p>
     </div>
   </div>
 </template>

@@ -11,7 +11,7 @@ useHead({
     class: "flex h-full flex-col bg-zinc-100 text-zinc-700 dark:text-zinc-300 dark:bg-body-dark",
   },
   htmlAttrs: {
-    lang: "en",
+    lang: "ro",
     class: "font-body h-full antialiased",
   },
 });

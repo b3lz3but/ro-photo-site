@@ -48,7 +48,7 @@ export const SITE_INFO = {
   NAME: 'Fixed Focused Designs',
   TAGLINE: 'Sculptăm Narațiuni Vizuale unde Emoțiile Se Întrepătrund cu Expresiile',
   PHOTOGRAPHER: 'Ciprian Rădulescu',
-  URL: 'https://yourdomain.com', // Update with actual domain
+  URL: 'https://fixedfocused-designs.ro', // Update with actual domain
 } as const
 
 export const NAV_LINKS = [

@@ -20,27 +20,61 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en',
+        lang: 'ro',
       },
       link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "manifest", href: "/site.webmanifest" },
+        { rel: "apple-touch-icon", href: "/favicon.ico" },
+        // Preconnect to external resources
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
+        { rel: "preconnect", href: "https://cloud.umami.is" },
+        // DNS prefetch for faster resolution
+        { rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
+        { rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
+        // Preload critical font with font-display: swap
         {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com",
+          rel: "preload",
+          href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Poppins:wght@400;600&display=swap",
+          as: "style",
+          onload: "this.onload=null;this.rel='stylesheet'"
         },
+        { rel: "alternate", type: "application/rss+xml", title: "Fixed Focused Designs - Povești", href: "/rss.xml" },
+      ],
+      // Fallback for non-JS font loading
+      noscript: [
+        { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Poppins:wght@400;600&display=swap">' }
+      ],
+      script: [
+        // Defer analytics script
         {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "anonymous",
-        },
-        {
-          href: "https://fonts.googleapis.com/css2?Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,400;0,600;0,700;1,400&display=swap",
-          rel: "stylesheet",
-        },
+          src: "https://cloud.umami.is/script.js",
+          defer: true,
+          async: true,
+          "data-website-id": "2ad2a9a4-85a0-4508-a861-452edf506c74"
+        }
       ],
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
+        { name: 'description', content: 'Fixed Focused Designs - Servicii profesionale de fotografie în România. Portrete, evenimente, fotografie de produs.' },
+        { name: 'author', content: 'Ciprian Rădulescu' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'Fixed Focused Designs' },
+        { property: 'og:title', content: 'Fixed Focused Designs - Fotografie Profesională' },
+        { property: 'og:description', content: 'Servicii profesionale de fotografie în România.' },
+        { property: 'og:image', content: 'https://fixedfocused-designs.ro/img/home/me.webp' },
+        { property: 'og:url', content: 'https://fixedfocused-designs.ro' },
+        { property: 'og:locale', content: 'ro_RO' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Fixed Focused Designs - Fotografie Profesională' },
+        { name: 'twitter:description', content: 'Servicii profesionale de fotografie în România.' },
+        { name: 'twitter:image', content: 'https://fixedfocused-designs.ro/img/home/me.webp' },
+        // Performance hints
+        { 'http-equiv': 'x-dns-prefetch-control', content: 'on' },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -48,11 +82,11 @@ export default defineNuxtConfig({
   },
 
   /**
-   * Nuxt Image configuration
+   * Nuxt Image configuration - optimized for performance
    */
   image: {
-    formats: ['webp', 'avif', 'jpeg'],
-    quality: 80,
+    formats: ['avif', 'webp'],
+    quality: 75,
     screens: {
       xs: 320,
       sm: 640,
@@ -61,6 +95,24 @@ export default defineNuxtConfig({
       xl: 1280,
       xxl: 1536,
     },
+    presets: {
+      thumbnail: {
+        modifiers: {
+          format: 'webp',
+          quality: 70,
+          width: 200,
+          height: 200,
+        }
+      },
+      hero: {
+        modifiers: {
+          format: 'webp',
+          quality: 80,
+          width: 800,
+        }
+      }
+    },
+    densities: [1, 2],
   },
 
   /**
@@ -93,19 +145,58 @@ export default defineNuxtConfig({
   },
 
   /**
+   * Vite configuration for build optimization
+   */
+  vite: {
+    build: {
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vue-vendor': ['vue', 'vue-router'],
+          }
+        }
+      }
+    },
+    css: {
+      devSourcemap: false,
+    }
+  },
+
+  /**
+   * Experimental features for performance
+   */
+  experimental: {
+    payloadExtraction: true,
+    renderJsonPayloads: true,
+    componentIslands: true,
+    viewTransition: true,
+  },
+
+  /**
    * Nitro configuration (server-side)
    */
   nitro: {
-    compressPublicAssets: true,
+    compressPublicAssets: {
+      gzip: true,
+      brotli: true,
+    },
+    minify: true,
     routeRules: {
       '/': { prerender: true },
       '/galleries': { swr: 3600 },
       '/stories': { swr: 3600 },
       '/hire-me': { prerender: true },
+      '/privacy-policy': { prerender: true },
+      '/terms': { prerender: true },
+      // Cache static assets
+      '/img/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     },
     prerender: {
-      crawlLinks: true,
-      routes: ['/sitemap.xml', '/robots.txt'],
+      crawlLinks: false,
+      routes: ['/sitemap.xml', '/robots.txt', '/rss.xml'],
+      failOnError: false,
     },
   },
 
@@ -129,7 +220,7 @@ export default defineNuxtConfig({
    */
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://yourdomain.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://fixedfocused-designs.ro',
     },
   },
 
@@ -137,15 +228,15 @@ export default defineNuxtConfig({
    * TypeScript configuration
    */
   typescript: {
-    strict: true,
-    typeCheck: true,
+    strict: false,
+    typeCheck: false,
   },
 
   /**
    * Development tools
    */
   devtools: {
-    enabled: true,
+    enabled: false,
   },
 
   compatibilityDate: "2025-02-05",

@@ -31,6 +31,7 @@
     "@nuxt/content": "^2.11.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
+    "nodemailer": "^7.0.12",
     "photoswipe": "^5.4.0",
     "rellax": "^1.12.1",
     "ufo": "^1.5.0"
@@ -41,6 +42,7 @@
     "@nuxtjs/color-mode": "^3.4.0",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/nodemailer": "^7.0.5",
     "@types/rellax": "^1.7.5",
     "eslint": "^8.57.0",
     "nuxt": "^3.12.0",

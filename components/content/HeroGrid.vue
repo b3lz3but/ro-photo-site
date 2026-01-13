@@ -36,9 +36,63 @@ defineProps({
 const defaultImage = "img/placeholder.jpg";
 </script>
 <template>
-  <div class="not-prose mt-16 sm:mt-24 content-visibility-visible contain-intrinsic-size-[auto_600px]">
-    <div class="flex items-center justify-center gap-5 py-4 sm:gap-6 relative z-20">
-      <!-- col1 -->
+  <div class="not-prose mt-8 sm:mt-16 lg:mt-24 content-visibility-visible contain-intrinsic-size-[auto_600px]">
+    <!-- Mobile: Single featured image -->
+    <div class="block sm:hidden px-4">
+      <div class="relative aspect-[3/4] w-full max-w-sm mx-auto overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-xl">
+        <NuxtImg
+          placeholder
+          sizes="100vw"
+          class="absolute inset-0 h-full w-full object-cover"
+          :src="image4?.src ? image4.src : defaultImage"
+          :alt="image4?.alt ? image4.alt : 'Featured photo'"
+          :width="image4?.width ? image4.width : 1"
+          :height="image4?.height ? image4.height : 1"
+          format="webp"
+          loading="lazy"
+        />
+      </div>
+      <!-- Mobile thumbnail row -->
+      <div class="flex justify-center gap-3 mt-4">
+        <div class="relative aspect-square w-20 overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
+          <NuxtImg
+            placeholder
+            sizes="80px"
+            class="absolute inset-0 h-full w-full object-cover"
+            :src="image2?.src ? image2.src : defaultImage"
+            :alt="image2?.alt ? image2.alt : 'Photo'"
+            format="webp"
+            loading="lazy"
+          />
+        </div>
+        <div class="relative aspect-square w-20 overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
+          <NuxtImg
+            placeholder
+            sizes="80px"
+            class="absolute inset-0 h-full w-full object-cover"
+            :src="image3?.src ? image3.src : defaultImage"
+            :alt="image3?.alt ? image3.alt : 'Photo'"
+            format="webp"
+            loading="lazy"
+          />
+        </div>
+        <div class="relative aspect-square w-20 overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
+          <NuxtImg
+            placeholder
+            sizes="80px"
+            class="absolute inset-0 h-full w-full object-cover"
+            :src="image5?.src ? image5.src : defaultImage"
+            :alt="image5?.alt ? image5.alt : 'Photo'"
+            format="webp"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Tablet and Desktop: Full grid -->
+    <div class="hidden sm:flex items-center justify-center gap-3 md:gap-5 py-4 lg:gap-6 relative z-20">
+      <!-- col1 - hidden on tablet, visible on desktop -->
       <div class="hidden lg:flex flex-col gap-5 sm:gap-6" v-parallax data-rellax-speed="3">
         <div class="relative aspect-[2/3] w-36 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
@@ -56,8 +110,8 @@ const defaultImage = "img/placeholder.jpg";
       </div>
 
       <!-- col2 -->
-      <div class="flex flex-col gap-5 sm:gap-6" v-parallax data-rellax-speed="1">
-        <div class="relative aspect-[4/3] w-44 md:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+      <div class="flex flex-col gap-3 md:gap-5 lg:gap-6" v-parallax data-rellax-speed="1">
+        <div class="relative aspect-[4/3] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
             sizes="sm:100vw md:50vw lg:220px"
@@ -70,7 +124,7 @@ const defaultImage = "img/placeholder.jpg";
             loading="lazy"
           />
         </div>
-        <div class="relative aspect-[3/4] w-44 md:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+        <div class="relative aspect-[3/4] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
             sizes="sm:100vw md:50vw lg:220px"
@@ -85,9 +139,9 @@ const defaultImage = "img/placeholder.jpg";
         </div>
       </div>
 
-      <!-- col3 -->
-      <div class="flex flex-col gap-5 sm:gap-6" v-parallax data-rellax-speed="0">
-        <div class="relative aspect-[2/3] w-72 md:w-80 lg:w-96 flex-none overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
+      <!-- col3 - main featured image -->
+      <div class="flex flex-col gap-3 md:gap-5 lg:gap-6" v-parallax data-rellax-speed="0">
+        <div class="relative aspect-[2/3] w-44 sm:w-56 md:w-72 lg:w-80 xl:w-96 flex-none overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
             sizes="sm:100vw md:50vw lg:380px"
@@ -103,8 +157,8 @@ const defaultImage = "img/placeholder.jpg";
       </div>
 
       <!-- col4 -->
-      <div class="flex flex-col gap-5 sm:gap-6" v-parallax data-rellax-speed="1">
-        <div class="relative aspect-[3/4] w-44 md:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+      <div class="flex flex-col gap-3 md:gap-5 lg:gap-6" v-parallax data-rellax-speed="1">
+        <div class="relative aspect-[3/4] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
             sizes="sm:100vw md:50vw lg:220px"
@@ -117,7 +171,7 @@ const defaultImage = "img/placeholder.jpg";
             loading="lazy"
           />
         </div>
-        <div class="relative aspect-[4/3] w-44 md:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+        <div class="relative aspect-[4/3] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
             sizes="sm:100vw md:50vw lg:220px"
@@ -132,7 +186,7 @@ const defaultImage = "img/placeholder.jpg";
         </div>
       </div>
 
-      <!-- col5 -->
+      <!-- col5 - hidden on tablet, visible on desktop -->
       <div class="hidden lg:flex flex-col gap-5 sm:gap-6" v-parallax data-rellax-speed="3">
         <div class="relative aspect-[2/3] w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
