@@ -41,15 +41,16 @@ const defaultImage = "img/placeholder.jpg";
     <div class="block sm:hidden px-4">
       <div class="relative aspect-[3/4] w-full max-w-sm mx-auto overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-xl">
         <NuxtImg
-          placeholder
-          sizes="100vw"
-          class="absolute inset-0 h-full w-full object-cover"
           :src="image4?.src ? image4.src : defaultImage"
           :alt="image4?.alt ? image4.alt : 'Featured photo'"
           :width="image4?.width ? image4.width : 1"
           :height="image4?.height ? image4.height : 1"
+          sizes="sm:100vw md:50vw"
+          class="absolute inset-0 h-full w-full object-cover"
           format="webp"
-          loading="lazy"
+          quality="80"
+          loading="eager"
+          :nonce="undefined"
         />
       </div>
       <!-- Mobile thumbnail row -->
@@ -114,7 +115,7 @@ const defaultImage = "img/placeholder.jpg";
         <div class="relative aspect-[4/3] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
-            sizes="sm:100vw md:50vw lg:220px"
+            sizes="112px sm:144px md:176px lg:220px"
             class="absolute inset-0 h-full w-full object-cover"
             :src="image2?.src ? image2.src : defaultImage"
             :alt="image2?.alt ? image2.alt : 'No alt text'"
@@ -127,7 +128,7 @@ const defaultImage = "img/placeholder.jpg";
         <div class="relative aspect-[3/4] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
-            sizes="sm:100vw md:50vw lg:220px"
+            sizes="112px sm:144px md:176px lg:220px"
             class="absolute inset-0 h-full w-full object-cover"
             :src="image3?.src ? image3.src : defaultImage"
             :alt="image3?.alt ? image3.alt : 'No alt text'"
@@ -139,19 +140,19 @@ const defaultImage = "img/placeholder.jpg";
         </div>
       </div>
 
-      <!-- col3 - main featured image -->
+      <!-- col3 - main featured image (LCP) -->
       <div class="flex flex-col gap-3 md:gap-5 lg:gap-6" v-parallax data-rellax-speed="0">
         <div class="relative aspect-[2/3] w-44 sm:w-56 md:w-72 lg:w-80 xl:w-96 flex-none overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
-            placeholder
-            sizes="sm:100vw md:50vw lg:380px"
-            class="absolute inset-0 h-full w-full object-cover"
             :src="image4?.src ? image4.src : defaultImage"
             :alt="image4?.alt ? image4.alt : 'No alt text'"
             :width="image4?.width ? image4.width : 1"
             :height="image4?.height ? image4.height : 1"
+            sizes="176px sm:224px md:288px lg:320px xl:384px"
+            class="absolute inset-0 h-full w-full object-cover"
             format="webp"
-            loading="lazy"
+            quality="80"
+            loading="eager"
           />
         </div>
       </div>
@@ -161,7 +162,7 @@ const defaultImage = "img/placeholder.jpg";
         <div class="relative aspect-[3/4] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
-            sizes="sm:100vw md:50vw lg:220px"
+            sizes="112px sm:144px md:176px lg:220px"
             class="absolute inset-0 h-full w-full object-cover"
             :src="image5?.src ? image5.src : defaultImage"
             :alt="image5?.alt ? image5.alt : 'No alt text'"
@@ -174,7 +175,7 @@ const defaultImage = "img/placeholder.jpg";
         <div class="relative aspect-[4/3] w-28 sm:w-36 md:w-44 lg:w-52 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <NuxtImg
             placeholder
-            sizes="sm:100vw md:50vw lg:220px"
+            sizes="112px sm:144px md:176px lg:220px"
             class="absolute inset-0 h-full w-full object-cover"
             :src="image6?.src ? image6.src : defaultImage"
             :alt="image6?.alt ? image6.alt : 'No alt text'"

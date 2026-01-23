@@ -41,6 +41,10 @@ export default defineNuxtConfig({
           onload: "this.onload=null;this.rel='stylesheet'"
         },
         { rel: "alternate", type: "application/rss+xml", title: "Fixed Focused Designs - Povești", href: "/rss.xml" },
+        // Preload LCP image for mobile
+        { rel: "preload", href: "/_ipx/w_400&f_webp&q_80/img/home/green.webp", as: "image", type: "image/webp", media: "(max-width: 639px)", fetchpriority: "high" },
+        // Preload LCP image for tablet/desktop
+        { rel: "preload", href: "/_ipx/w_384&f_webp&q_80/img/home/green.webp", as: "image", type: "image/webp", media: "(min-width: 640px)", fetchpriority: "high" },
       ],
       // Fallback for non-JS font loading
       noscript: [
